@@ -1,13 +1,18 @@
-# Control Mapping Matrix
+# Mapping Matrix – Security Frameworks (Lab 6)
 
-| Control Source | ID / Section | Host/Platform | Status | Evidence |
-|---|---|---|---|---|
-| STIG Ubuntu 20 | SV-238196r653763 – Temp accounts expire <= 72h | Ubuntu | ✅ Implemented | screenshot |
-| STIG Ubuntu 20 | SV-238206r653793 – Sudo group least privilege | Ubuntu | ✅ Implemented | screenshot |
-| STIG Ubuntu 20 | SV-238354r853429 – App firewall (UFW) installed | Ubuntu | ✅ Implemented | screenshot |
-| CIS AWS Foundations | 1.12 – No root access key | AWS | ✅ Implemented | screenshot |
-| CIS AWS Foundations | 1.10 – Prevent password reuse | AWS | ✅ Implemented | screenshot |
-| CIS AWS Foundations | 1.13 – Root hardware MFA | AWS | ✅ Implemented | screenshot |
-| CIS Ubuntu 22.04 | 5.5.3 – Root GID 0 | Ubuntu | ✅ Implemented | screenshot |
-| CIS Ubuntu 22.04 | 3.5.2.9 – nftables enabled | Ubuntu | ✅ Implemented | screenshot |
-| OWASP Top 10 | A06 – Outdated components updated | Ubuntu | ✅ Implemented | screenshot |
+This matrix maps each control to your method, remediation, and **evidence** (screenshot). Replace any placeholder filenames in the **Evidence** column with your actual screenshots placed in the `evidence/` folder.
+
+> Analyst: **Jack Grainger**
+
+| # | Control Source | Security Control ID | Control / Rule Title | Checked Using | Fix / Remediation | Additional Steps for Compliance | Comments | Evidence |
+|---:|---|---|---|---|---|---|---|---|
+| 1 | STIG_Ubuntu_20 | SV-238196r653763_rule | Provision temporary user accounts with expiration ≤ 72 hours | `sudo chage -l <temp_user> \| grep Expires` | `sudo chage -E $(date -d "+3 days" +%F) <temp_user>` | Verify all temp accounts auto-expire within 72 hours | Important to prevent lingering temp accounts | [evidence/01-ubuntu-temp-accounts-expiry.png](../evidence/01-ubuntu-temp-accounts-expiry.png) |
+| 2 | CIS AWS Foundations v1.0.0 (pp. 27–28) | CCE-78910-7 (CIS CSC v6.0 #5.1) | **1.12** Ensure no root account access key exists | Download **Credential Report** in IAM | Deactivate then **delete** any root access keys | Prefer deletion over deactivation to prevent reactivation | Report showed `access_key_1_active=true`; remediated | [evidence/02-aws-root-access-key-report.png](../evidence/02-aws-root-access-key-report.png), [evidence/02b-aws-root-access-key-deactivated.png](../evidence/02b-aws-root-access-key-deactivated.png) |
+| 3 | CIS AWS Foundations v1.0.0 (p. 24) | CCE-78908-1 | **1.10** Password policy prevents password reuse | IAM → Account settings → Custom password policy | Set **“Number of passwords to remember” = 24** | Document change; monitor resets; enforce MFA | Initially unchecked; updated per CIS guidance | [evidence/03-aws-password-reuse-24.png](../evidence/03-aws-password-reuse-24.png) |
+| 4 | STIG_Ubuntu_20 | SV-238206r653793_rule | Only required users in `sudo` group | `grep sudo /etc/group` | Remove unexpected users: `sudo gpasswd -d <user> sudo` | Periodic reviews to sustain least privilege | Screenshot confirms only your user in sudo | [evidence/04-ubuntu-sudo-group-members.png](../evidence/04-ubuntu-sudo-group-members.png) |
+| 5 | OWASP Top 10 (A06:2012) | — | Vulnerable & Outdated Components (packages) | `sudo apt update && apt list --upgradable` | `sudo apt upgrade -y` | Enable automatic updates; regular vuln scans | Initial output showed ~15 upgradable packages | [evidence/05-ubuntu-upgradable-packages.png](../evidence/05-ubuntu-upgradable-packages.png) |
+| 6 | STIG_Ubuntu_20 | SV-238354r853429_rule | Application firewall installed to control remote access | `dpkg -l \| grep ufw` | `sudo apt-get install ufw` | Maintain change history; ensure ruleset reviewed | Output showed `ii ufw` present | [evidence/06-ubuntu-ufw-installed.png](../evidence/06-ubuntu-ufw-installed.png) |
+| 7 | CIS Ubuntu 22.04 LTS (p. 716) | 5.5.3 | Default group for root is **GID 0** | `grep "^root:" /etc/passwd | cut -f4 -d:` → `0` | Investigate and correct any drift; enforce baseline | Regular audits; config mgmt tooling | Confirms GID = 0 | [evidence/07-ubuntu-root-gid-0.png](../evidence/07-ubuntu-root-gid-0.png) |
+| 8 | CIS Ubuntu 22.04 LTS (p. 391) | 3.5.2.9 | Ensure **nftables** service is enabled | `systemctl is-enabled nftables` | `sudo systemctl enable --now nftables` | Persist across reboots; validate rules | Initial state was `disabled`; remediated | [evidence/08-ubuntu-nftables-enabled.png](../evidence/08-ubuntu-nftables-enabled.png) |
+| 9 | STIG_Ubuntu_20 | SV-238360r853435_rule | Configure and enable **AppArmor** | `dpkg -l \| grep apparmor`; `systemctl is-active apparmor`; `systemctl is-enabled apparmor` | `sudo apt-get install apparmor`; `sudo systemctl enable --now apparmor` | Optional hardening profiles; periodic validation | — | [evidence/09-ubuntu-apparmor-enabled.png](../evidence/09-ubuntu-apparmor-enabled.png) |
+| 10 | CIS AWS Foundations (p. 29) | 1.13 | Hardware MFA enabled for **root** | `aws iam get-account-summary` (CloudShell) | Enable hardware MFA in IAM | Document enrollment & backup codes | `AccountMFAEnabled=1` confirmed | [evidence/10-aws-root-hardware-mfa.png](../evidence/10-aws-root-hardware-mfa.png) |
