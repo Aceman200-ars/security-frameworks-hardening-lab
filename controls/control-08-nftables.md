@@ -1,6 +1,7 @@
 
+---
 
-###  `controls/control-08-nftables.md`
+### 📄 `controls/control-08-nftables.md`
 ```markdown
 # Control 08 – Ensure Nftables Service Enabled
 
@@ -16,6 +17,8 @@ Ensure nftables service is enabled.
 ## Checked Using
 ```bash
 systemctl is-enabled nftables
+
+
 ```
 ## Evidence
 ![Nftables enabled](../docs/screenshots/CIS_Linux_2.0.png)
