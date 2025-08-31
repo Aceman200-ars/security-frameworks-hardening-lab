@@ -1,7 +1,4 @@
 
-
-### 📄 `controls/control-05-outdated-components.md`
-```markdown
 # Control 05 – Vulnerable & Outdated Components
 
 **Analyst:** Jack Grainger  
