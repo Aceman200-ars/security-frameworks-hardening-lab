@@ -12,3 +12,6 @@ The Ubuntu operating system must provision temporary user accounts with an expir
 ## Checked Using
 ```bash
 sudo chage -l <temp_user> | grep Expires
+```
+## Evidence
+![Temp Account Expiration](../docs/screenshots/STIG_Ubuntu_1.0.png)
