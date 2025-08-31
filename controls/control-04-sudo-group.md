@@ -12,3 +12,6 @@ Ensure only required users are part of the sudo group.
 ## Checked Using
 ```bash
 grep sudo /etc/group
+```
+## Evidence
+(../docs/screenshots/STIG_Ubuntu_2.0.png)
