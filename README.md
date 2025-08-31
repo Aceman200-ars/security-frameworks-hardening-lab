@@ -15,18 +15,10 @@ This repo emphasizes **repeatable checks**, **clear remediation**, and **auditab
 
 ## What’s Inside
 - `controls/` – one Markdown per control, with **Check / Fix / Additional steps / Evidence**
-- `scripts/` – small, idempotent scripts to verify or enforce controls
 - `docs/` – environment, framework overview, control mapping, and screenshots
 - `reports/` – executive summary + audit log of what ran and when
 
 ## Ethics
 Lab-only resources. No production secrets, keys, or PII are stored here. See `ETHICS.md`.
-
-## Quickstart
-1. Review `docs/environment.md`.
-2. Run checks (e.g., `bash scripts/ubuntu/check_temp_account_expiry.sh`).
-3. Capture evidence and place in `docs/screenshots/`.
-4. Update the corresponding file in `controls/...` with your results.
-5. Summarize outcomes in `reports/executive-summary.md`.
 
 
