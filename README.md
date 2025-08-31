@@ -29,4 +29,4 @@ Lab-only resources. No production secrets, keys, or PII are stored here. See `ET
 4. Update the corresponding file in `controls/...` with your results.
 5. Summarize outcomes in `reports/executive-summary.md`.
 
-> *This structure is based on my Lab 6 notes and evidence.* :contentReference[oaicite:1]{index=1}
+
