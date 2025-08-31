@@ -1,7 +1,6 @@
 
----
 
-### 📄 `controls/control-08-nftables.md`
+###  `controls/control-08-nftables.md`
 ```markdown
 # Control 08 – Ensure Nftables Service Enabled
 
