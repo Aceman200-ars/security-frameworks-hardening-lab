@@ -1,8 +1,4 @@
 
----
-
-### 📄 `controls/control-07-root-gid.md`
-```markdown
 # Control 07 – Root Account GID 0
 
 **Analyst:** Jack Grainger  
