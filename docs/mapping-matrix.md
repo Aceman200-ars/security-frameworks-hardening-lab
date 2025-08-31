@@ -1,6 +1,6 @@
 # Mapping Matrix – Security Frameworks (Lab 6)
 
-This matrix maps each control to your method, remediation, and **evidence** (screenshot). Replace any placeholder filenames in the **Evidence** column with your actual screenshots placed in the `evidence/` folder.
+This matrix maps each control to your method, remediation, and **evidence** (screenshot). Replace any placeholder filenames in the **Evidence** column with your actual screenshots placed in the `screenshots/` folder.
 
 > Analyst: **Jack Grainger**
 
