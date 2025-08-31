@@ -1,8 +1,4 @@
 
----
-
-### 📄 `controls/control-06-ufw-firewall.md`
-```markdown
 # Control 06 – Application Firewall Installed
 
 **Analyst:** Jack Grainger  
