@@ -14,4 +14,4 @@ Ensure only required users are part of the sudo group.
 grep sudo /etc/group
 ```
 ## Evidence
-(../docs/screenshots/STIG_Ubuntu_2.0.png)
+![Administrator Controls Assurance](../docs/screenshots/STIG_Ubuntu_2.0.png)
